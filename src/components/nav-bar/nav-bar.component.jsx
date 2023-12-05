@@ -37,7 +37,6 @@ const NavBar=()=>{
                 } 
                 <div onClick={()=>{setIsCartOpen(!isCartOpen)}}>
                 <CartIcon/>
-
                 </div>
               
             </div>
