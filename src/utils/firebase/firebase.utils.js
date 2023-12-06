@@ -12,7 +12,10 @@ import{
     getFirestore,
     doc,
     getDoc,
-    setDoc
+    setDoc,
+    collection,
+    query,
+    getDocs
 } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -66,6 +69,32 @@ const firebaseConfig = {
     //if user data does not exist
     //create/set the document with data from userAuth
 };
+
+
+// export const uploadShopDatainServer=(SHOP_DATA)=>{
+//     SHOP_DATA.map(async (category)=>{
+//         const DocRef=doc(db,"Categories",category.title)
+//         await setDoc(DocRef,category)
+//     })
+//     return null;
+
+// }
+export const getShopDataFromServer=async()=>
+{
+  const collectionRef=collection(db,"Categories")
+  const q=query(collectionRef)
+  const querySnapshot=await getDocs(q)
+ const categoryMap=querySnapshot.docs.reduce((acc,docSnapshot)=>{
+    // console.log(docSnapshot.id);
+    const {title,items}=docSnapshot.data();
+    acc[title.toLowerCase()]=items;
+    return acc;
+ },{})
+ 
+ console.log(categoryMap);
+ return categoryMap;
+ 
+}
 
 export const createAuthUserWithEmailAndPassword =async(email,password) =>{
    return await createUserWithEmailAndPassword(auth,email,password);
