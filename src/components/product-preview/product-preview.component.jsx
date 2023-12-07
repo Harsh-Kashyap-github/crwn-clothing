@@ -1,6 +1,6 @@
 import { Fragment, useContext } from "react";
 import { ProductsContext } from "../../contexts/products.context";
-import ProductCard from "../../components/product-card/product-card.component";
+import ProductCard from "../product-card/product-card.component";
 import { useParams } from "react-router-dom";
 import "./product-preview.styles.scss"
 const ProductPreview=()=>{

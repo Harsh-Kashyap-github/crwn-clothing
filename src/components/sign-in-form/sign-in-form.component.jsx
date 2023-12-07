@@ -7,7 +7,6 @@ import FormInput from "../form-input/form-input.component";
 // import { useContext } from 'react';
 
 import { signInWithGooglePopup,
-    creatUserDocumentFromAuth,
     } from "../../utils/firebase/firebase.utils";
 
 const SignInForm=() =>{
@@ -34,7 +33,7 @@ const SignInForm=() =>{
     const UpdateFormField=(event) =>{
         const{name,value}=event.target;
         setFormFields({...FormFields,[name]:value}) // This sync fucn program move forward before completing this thats why one log dosnt show real time value one tick slow.
-        console.log(FormFields)
+        // console.log(FormFields)
     }
     const handelSubmit= async(event) =>{
        event.preventDefault();
@@ -61,11 +60,13 @@ const SignInForm=() =>{
     }
 
     const SignInWithGoogle=async ()=>{
+        // const {user}=
         const {user}=await signInWithGooglePopup();
         // const userDocRef=await creatUserDocumentFromAuth(user);
         // console.log(user,userDocRef);
         // setCurrentUser(user);
         alert("Succesfully Signed In")
+        console.log(user);
         // console.log("You SignedIn Using Google");
     };
 

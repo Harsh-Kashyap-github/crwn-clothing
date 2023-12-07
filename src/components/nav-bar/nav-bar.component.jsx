@@ -10,8 +10,6 @@ import { CartContext } from "../../contexts/cart.context"
 
 const NavBar=()=>{
     const {currentUser,setCurrentUser}=useContext(UserContext)
-    console.log(currentUser);
-
     const signOutHandler= async()=>{
         await SignOutUser();
         setCurrentUser(null)

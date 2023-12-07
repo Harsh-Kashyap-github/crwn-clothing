@@ -5,7 +5,7 @@ import { creatUserDocumentFromAuth, onAuthStateChangedListener } from "../utils/
 export const UserContext=createContext({
     //Default Value
     currentUser:null,
-    setCurrentUser:() =>null
+    setCurrentUser:() =>{}
 });
 
 export const UserProvider =({children}) =>{
@@ -17,8 +17,11 @@ export const UserProvider =({children}) =>{
             if(user)
             {
                 creatUserDocumentFromAuth(user);
+                 
             }
             setCurrentUser(user);
+          
+            
         })
         return unsubscribe;
     },[])

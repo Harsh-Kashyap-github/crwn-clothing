@@ -21,7 +21,7 @@ const SignUpForm=()=>{
     const UpdateFormField=(event) =>{
         const{name,value}=event.target;
         setFormFields({...FormFields,[name]:value}) // This sync fucn program move forward before completing this thats why one log dosnt show real time value one tick slow.
-        console.log(FormFields)
+        // console.log(FormFields)
     }
     const handelSubmit= async(event) =>{
        event.preventDefault();
@@ -34,6 +34,7 @@ const SignUpForm=()=>{
         const {user}=await createAuthUserWithEmailAndPassword(email,password);
         
         await creatUserDocumentFromAuth(user,{displayName})
+        console.log(user.uid);
         setFormFields(defaultFormField);
         // setCurrentUser(user);
         alert("User signUp Succesful");

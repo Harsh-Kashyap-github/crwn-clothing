@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createContext } from "react";
 
+
 const addCartItems=(cartItems,productToAdd)=>{
     let isPresent=false;
   let newcartItems= cartItems.map((item)=>{
@@ -85,7 +86,7 @@ export const CartProvider=({children})=>{
     const subItemToCart=(productToSub)=>{
         setCartItems(subCartItems(cartItems,productToSub))
     }
-
-    const value={isCartOpen,setIsCartOpen,addItemToCart,cartItems,removeItemFromCart,subItemToCart}
+ 
+    const value={isCartOpen,setIsCartOpen,addItemToCart,cartItems,removeItemFromCart,subItemToCart,setCartItems}
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }

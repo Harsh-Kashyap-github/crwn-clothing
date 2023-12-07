@@ -18,6 +18,7 @@ import{
     getDocs
 } from 'firebase/firestore'
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyC0Ph15jL0VyCUHdTnhpMrW41jR9Ba5cQQ",
     authDomain: "crwn-clothing-db-3a955.firebaseapp.com",
@@ -71,6 +72,40 @@ const firebaseConfig = {
 };
 
 
+export const CreateCartFromAuth= async(userAuth,cartItems)=>{
+    try{
+        const CartRef= doc(db,"cart",userAuth.uid);
+        const cartSnapshot=await getDoc(CartRef);
+        // console.log("cart",cartSnapshot.exists());
+        if(!cartSnapshot.exists())
+        {
+            setDoc(CartRef,{cartItems})
+            return null;
+        }
+        else{
+            return cartSnapshot.data()["cartItems"]
+        }
+    }catch(error)
+    {
+        console.log("Cant get CartData");
+        return null;
+    }
+    
+    }
+
+export const UpdateCartAtServer=async(cartItems,userAuth)=>{
+    try{
+        const CartRef=doc(db,"cart",userAuth.uid);
+        await setDoc(CartRef,{cartItems})
+    }catch(error)
+    {
+        console.log("Cant Update CartData");
+    }
+     
+   
+}
+
+
 // export const uploadShopDatainServer=(SHOP_DATA)=>{
 //     SHOP_DATA.map(async (category)=>{
 //         const DocRef=doc(db,"Categories",category.title)
@@ -107,4 +142,8 @@ export const SignInAuthWithEmailAndPassword= async (email,password) =>{
 
 export const SignOutUser= async () =>await (signOut(auth))
 
-export const onAuthStateChangedListener=(callback) => onAuthStateChanged(auth,callback);
+export const onAuthStateChangedListener=(callback) =>{ 
+    onAuthStateChanged(auth,callback)
+    // console.log("auth",auth);
+
+}
