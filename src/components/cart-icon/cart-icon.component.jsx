@@ -26,7 +26,12 @@ const CartIcon =() =>{
     }
 
 // setCurrentUser(currentUser);
-useEffect(()=>{getCartDataFromServer()},[currentUser])
+useEffect(()=>{getCartDataFromServer()
+if(!currentUser)
+{
+    setCartItems([])
+}
+},[currentUser])
 useEffect(()=>{cartDataUploadToServer();},[cartItems])
 
 
